@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bd3mt1png5ieh"]
+
+[ext_resource type="Texture2D" uid="uid://bw308db2rq46i" path="res://icon.svg" id="1_f66x4"]
+[ext_resource type="Script" path="res://components/movement/movement.gd" id="2_6f31d"]
+[ext_resource type="Script" path="res://components/movement/movement_velocity_input.gd" id="3_rbqpe"]
+[ext_resource type="Resource" uid="uid://dfybgx80usew8" path="res://resources/player/movement/player_movement_stats.tres" id="4_w0qjj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_it1l4"]
+size = Vector2(125, 125)
+
+[node name="Root" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(586, 288)
+texture = ExtResource("1_f66x4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(585.5, 288.5)
+shape = SubResource("RectangleShape2D_it1l4")
+
+[node name="Movement" type="Node" parent="Player" node_paths=PackedStringArray("actor")]
+script = ExtResource("2_6f31d")
+actor = NodePath("..")
+
+[node name="MovementVelocityInput" type="Node" parent="Player" node_paths=PackedStringArray("actor")]
+script = ExtResource("3_rbqpe")
+actor = NodePath("..")
+movement_stats = ExtResource("4_w0qjj")
